@@ -100,6 +100,8 @@ const sidebarStyles: React.CSSProperties = {
   borderLeft: '1px solid #333',
   overflowY: 'auto',
   backgroundColor: '#12121f',
+  position: 'relative',
+  zIndex: 1100,
 };
 
 const dialogOverlayStyles: React.CSSProperties = {
@@ -392,6 +394,7 @@ function AppContent() {
           isExpired={timer.isExpired}
           isRapidFire={state.isRapidFire}
           isAnswerRevealed={state.isAnswerRevealed}
+          onClose={closeQuestion}
         />
       )}
     </div>

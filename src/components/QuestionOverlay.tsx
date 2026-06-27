@@ -6,6 +6,7 @@ export interface QuestionOverlayProps {
   isExpired: boolean;
   isRapidFire: boolean;
   isAnswerRevealed: boolean;
+  onClose?: () => void;
 }
 
 const styles = {
@@ -75,6 +76,19 @@ const styles = {
     backgroundColor: 'rgba(139, 195, 74, 0.1)',
     border: '1px solid rgba(139, 195, 74, 0.3)',
   },
+  closeButton: {
+    position: 'absolute' as const,
+    top: '1.5rem',
+    right: '1.5rem',
+    padding: '0.6rem 1.2rem',
+    borderRadius: '6px',
+    border: '1px solid rgba(255,255,255,0.3)',
+    backgroundColor: 'rgba(96, 125, 139, 0.8)',
+    color: '#fff',
+    fontSize: '0.95rem',
+    fontWeight: 600,
+    cursor: 'pointer',
+  },
 };
 
 export function QuestionOverlay({
@@ -83,6 +97,7 @@ export function QuestionOverlay({
   isExpired,
   isRapidFire,
   isAnswerRevealed,
+  onClose,
 }: QuestionOverlayProps) {
   const timerStyle = {
     ...styles.timer,
@@ -91,6 +106,16 @@ export function QuestionOverlay({
 
   return (
     <div style={styles.overlay} data-testid="question-overlay">
+      {onClose && (
+        <button
+          style={styles.closeButton}
+          onClick={onClose}
+          aria-label="Close question and return to board"
+          data-testid="overlay-close-button"
+        >
+          ✕ Close
+        </button>
+      )}
       <div style={styles.content}>
         {isRapidFire && (
           <div style={styles.rapidFireIndicator} data-testid="rapid-fire-indicator">
