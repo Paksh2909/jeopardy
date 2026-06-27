@@ -9,13 +9,13 @@ import type { Question, Topic } from '../types';
  */
 export function getDifficultyColor(difficulty: number): string {
   const colorMap: Record<number, string> = {
-    1: '#4CAF50', // Green (easy)
-    2: '#8BC34A', // Light green
-    3: '#FFC107', // Amber (medium)
-    4: '#FF9800', // Orange
-    5: '#F44336', // Red (hard)
+    1: 'rgba(76, 175, 80, 0.35)',   // Green (easy)
+    2: 'rgba(139, 195, 74, 0.35)',  // Light green
+    3: 'rgba(255, 193, 7, 0.3)',    // Amber (medium)
+    4: 'rgba(255, 152, 0, 0.3)',    // Orange
+    5: 'rgba(244, 67, 54, 0.3)',    // Red (hard)
   };
-  return colorMap[difficulty] ?? '#9E9E9E';
+  return colorMap[difficulty] ?? 'rgba(158, 158, 158, 0.25)';
 }
 
 // --- Styles ---
@@ -55,23 +55,36 @@ function getCardStyles(question: Question, isClickable: boolean): React.CSSPrope
   const isAnswered = question.status === QuestionStatus.ANSWERED;
   const isSkipped = question.status === QuestionStatus.SKIPPED;
 
+  // Solid border hint color (slightly more opaque version)
+  const borderColors: Record<number, string> = {
+    1: 'rgba(76, 175, 80, 0.5)',
+    2: 'rgba(139, 195, 74, 0.5)',
+    3: 'rgba(255, 193, 7, 0.45)',
+    4: 'rgba(255, 152, 0, 0.45)',
+    5: 'rgba(244, 67, 54, 0.45)',
+  };
+  const borderColor = isSkipped
+    ? 'rgba(255,255,255,0.05)'
+    : (borderColors[question.difficulty] ?? 'rgba(255,255,255,0.08)');
+
   return {
     padding: '18px 14px',
     borderRadius: '8px',
-    backgroundColor: isSkipped ? 'rgba(100,100,120,0.3)' : baseColor,
-    color: isSkipped ? '#888' : '#ffffff',
+    backgroundColor: isSkipped ? 'rgba(60,60,70,0.2)' : baseColor,
+    color: isSkipped ? '#666' : 'rgba(255,255,255,0.9)',
     opacity: isAnswered ? 0.4 : 1,
     textDecoration: isAnswered ? 'line-through' : 'none',
     cursor: isClickable ? 'pointer' : 'default',
     fontWeight: 600,
     fontSize: '1rem',
     boxShadow: isClickable
-      ? '0 4px 12px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.15)'
+      ? '0 4px 12px rgba(0,0,0,0.3)'
       : '0 2px 4px rgba(0,0,0,0.2)',
     transition: 'transform 0.15s ease, box-shadow 0.15s ease',
     userSelect: 'none' as const,
     position: 'relative' as const,
-    border: '1px solid rgba(255,255,255,0.1)',
+    border: `1px solid ${borderColor}`,
+    backdropFilter: 'blur(4px)',
   };
 }
 
