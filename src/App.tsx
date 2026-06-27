@@ -12,6 +12,7 @@ import { validateGameConfig } from './utils/validation';
 import { loadGameState } from './utils/persistence';
 import { GameConfig, GamePhase, QuestionStatus } from './types';
 import { playBuzzer, playCelebration, playSelect, playTick } from './utils/sounds';
+import confetti from 'canvas-confetti';
 
 /**
  * Sample game configuration for development/demo purposes.
@@ -370,6 +371,12 @@ function AppContent() {
     awardFullPoints(teamId);
     closeQuestion();
     playCelebration();
+    confetti({
+      particleCount: 150,
+      spread: 80,
+      origin: { y: 0.6 },
+      colors: ['#43a047', '#f9a825', '#58a6ff', '#e53935', '#fff'],
+    });
     setPendingAdvance(true);
   }, [awardFullPoints, closeQuestion]);
 
@@ -383,6 +390,12 @@ function AppContent() {
     awardHalfPoints(teamId);
     closeQuestion();
     playCelebration();
+    confetti({
+      particleCount: 60,
+      spread: 50,
+      origin: { y: 0.6 },
+      colors: ['#f9a825', '#58a6ff', '#fff'],
+    });
     setShowHalfPointsPicker(false);
     setPendingAdvance(true);
   }, [awardHalfPoints, closeQuestion]);
@@ -531,6 +544,7 @@ function AppContent() {
           isRapidFire={state.isRapidFire}
           isAnswerRevealed={state.isAnswerRevealed}
           onClose={handleCloseQuestion}
+          totalDuration={state.activeQuestion.timerSeconds ?? state.config.defaultTimerSeconds}
         />
       )}
 

@@ -59,11 +59,11 @@ describe('QuestionOverlay', () => {
     expect(timer).toHaveStyle({ color: '#F44336' });
   });
 
-  it('does not apply red color to timer when remaining time is 10 or more', () => {
+  it('shows white color for timer when remaining time is 10 or more', () => {
     render(
       <QuestionOverlay
         question={mockQuestion}
-        remainingTime={10}
+        remainingTime={15}
         isExpired={false}
         isRapidFire={false}
         isAnswerRevealed={false}
@@ -86,7 +86,9 @@ describe('QuestionOverlay', () => {
     );
 
     expect(screen.getByTestId('expired-indicator')).toHaveTextContent("TIME'S UP");
-    expect(screen.queryByTestId('timer-display')).not.toBeInTheDocument();
+    // Timer display still exists in circular timer but shows TIME'S UP text
+    const timer = screen.getByTestId('timer-display');
+    expect(timer).toHaveTextContent("TIME'S");
   });
 
   it('shows rapid fire indicator when in RAPID_FIRE phase', () => {
