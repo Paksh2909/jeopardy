@@ -6,6 +6,7 @@ import { HostControlPanel } from './components/HostControlPanel';
 import Scoreboard from './components/Scoreboard';
 import { TeamSetup } from './components/TeamSetup';
 import { TeamPickerPopup } from './components/TeamPickerPopup';
+import { RulesPopup } from './components/RulesPopup';
 import { useTimer } from './hooks/useTimer';
 import { validateGameConfig } from './utils/validation';
 import { loadGameState } from './utils/persistence';
@@ -243,6 +244,7 @@ function AppContent() {
   const [showResumeDialog, setShowResumeDialog] = useState(false);
   const [showTeamSetup, setShowTeamSetup] = useState(false);
   const [showHalfPointsPicker, setShowHalfPointsPicker] = useState(false);
+  const [showRules, setShowRules] = useState(false);
   const [validationErrors, setValidationErrors] = useState<string[]>([]);
   const [initialized, setInitialized] = useState(false);
   const [round, setRound] = useState(1);
@@ -456,7 +458,16 @@ function AppContent() {
       {/* Header */}
       <header style={headerStyles}>
         <h1 style={titleStyles}>{state.config.title}</h1>
-        <span style={{ fontSize: '0.9rem', color: '#aaa' }}>Round {round}</span>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+          <span style={{ fontSize: '0.9rem', color: '#aaa' }}>Round {round}</span>
+          <button
+            style={{ padding: '6px 14px', borderRadius: '6px', border: '1px solid #555', backgroundColor: 'transparent', color: '#89b4fa', fontSize: '0.85rem', fontWeight: 600, cursor: 'pointer' }}
+            onClick={() => setShowRules(true)}
+            data-testid="rules-button"
+          >
+            📋 Rules
+          </button>
+        </div>
       </header>
 
       {/* Main content area */}
@@ -507,6 +518,11 @@ function AppContent() {
           onSelect={handleHalfPointsSelect}
           onCancel={() => setShowHalfPointsPicker(false)}
         />
+      )}
+
+      {/* Rules Popup */}
+      {showRules && (
+        <RulesPopup onDismiss={() => setShowRules(false)} />
       )}
     </div>
   );

@@ -90,10 +90,10 @@ describe('HostControlPanel', () => {
   });
 
   describe('button enable/disable in RAPID_FIRE', () => {
-    it('enables Award Full Points, Award Half Points, Reveal Answer, and Close', () => {
+    it('enables Award Half Points, Reveal Answer, and Close but disables Award Full Points', () => {
       render(<HostControlPanel {...createProps({ phase: GamePhase.RAPID_FIRE })} />);
 
-      expect(screen.getByRole('button', { name: /award full points/i })).toBeEnabled();
+      expect(screen.getByRole('button', { name: /award full points/i })).toBeDisabled();
       expect(screen.getByRole('button', { name: /award half points/i })).toBeEnabled();
       expect(screen.getByRole('button', { name: /reveal answer/i })).toBeEnabled();
       expect(screen.getByRole('button', { name: /close or skip/i })).toBeEnabled();
@@ -107,10 +107,10 @@ describe('HostControlPanel', () => {
   });
 
   describe('button enable/disable in ANSWER_REVEALED', () => {
-    it('enables Award Full Points and Close', () => {
+    it('enables Close but disables Award Full Points', () => {
       render(<HostControlPanel {...createProps({ phase: GamePhase.ANSWER_REVEALED })} />);
 
-      expect(screen.getByRole('button', { name: /award full points/i })).toBeEnabled();
+      expect(screen.getByRole('button', { name: /award full points/i })).toBeDisabled();
       expect(screen.getByRole('button', { name: /close or skip/i })).toBeEnabled();
     });
 

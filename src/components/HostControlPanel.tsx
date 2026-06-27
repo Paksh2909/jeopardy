@@ -116,10 +116,7 @@ export const HostControlPanel: React.FC<HostControlPanelProps> = ({
   const isQuestionActive = phase !== GamePhase.BOARD_VIEW;
 
   // Button enable/disable logic
-  const canAwardFullPoints =
-    phase === GamePhase.QUESTION_OPEN ||
-    phase === GamePhase.RAPID_FIRE ||
-    phase === GamePhase.ANSWER_REVEALED;
+  const canAwardFullPoints = phase === GamePhase.QUESTION_OPEN;
 
   const canStartRapidFire = phase === GamePhase.QUESTION_OPEN;
 
