@@ -11,7 +11,7 @@ import { useTimer } from './hooks/useTimer';
 import { validateGameConfig } from './utils/validation';
 import { loadGameState } from './utils/persistence';
 import { GameConfig, GamePhase, QuestionStatus } from './types';
-import { playBuzzer, playCelebration, playSelect } from './utils/sounds';
+import { playBuzzer, playCelebration, playSelect, playTick } from './utils/sounds';
 
 /**
  * Sample game configuration for development/demo purposes.
@@ -409,6 +409,13 @@ function AppContent() {
     setPendingAdvance(false);
     dispatch({ type: 'SET_STATE', payload: { ...state, currentTeamId: nextTeamId } });
   }, [pendingAdvance, state, turnIndex, dispatch]);
+
+  // Play tick sound each second while timer is running
+  useEffect(() => {
+    if (timer.isRunning && timer.remainingTime > 0) {
+      playTick(timer.remainingTime);
+    }
+  }, [timer.remainingTime, timer.isRunning]);
 
   // Show validation errors
   if (validationErrors.length > 0) {

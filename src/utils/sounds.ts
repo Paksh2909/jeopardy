@@ -101,3 +101,34 @@ export function playSelect(): void {
     // Silently fail if audio isn't available
   }
 }
+
+/**
+ * Tick sound — plays each second while timer is counting down.
+ * A soft, short click that gets higher-pitched and louder in the last 10 seconds.
+ */
+export function playTick(remainingTime: number): void {
+  try {
+    const ctx = getAudioContext();
+    const oscillator = ctx.createOscillator();
+    const gain = ctx.createGain();
+
+    oscillator.connect(gain);
+    gain.connect(ctx.destination);
+
+    // In the last 10 seconds, pitch goes up and volume increases
+    const isUrgent = remainingTime <= 10;
+    const freq = isUrgent ? 1200 + (10 - remainingTime) * 50 : 800;
+    const vol = isUrgent ? 0.12 + (10 - remainingTime) * 0.015 : 0.06;
+
+    oscillator.type = 'sine';
+    oscillator.frequency.setValueAtTime(freq, ctx.currentTime);
+
+    gain.gain.setValueAtTime(vol, ctx.currentTime);
+    gain.gain.linearRampToValueAtTime(0, ctx.currentTime + 0.06);
+
+    oscillator.start(ctx.currentTime);
+    oscillator.stop(ctx.currentTime + 0.06);
+  } catch {
+    // Silently fail if audio isn't available
+  }
+}
