@@ -247,6 +247,7 @@ function AppContent() {
   const [initialized, setInitialized] = useState(false);
   const [round, setRound] = useState(1);
   const [turnIndex, setTurnIndex] = useState(0);
+  const [pendingAdvance, setPendingAdvance] = useState(false);
 
   // Track previous phase to detect transitions
   const prevPhaseRef = useRef<GamePhase | null>(null);
@@ -341,47 +342,48 @@ function AppContent() {
     }
   }, [state, dispatch]);
 
-  // Advance to next team in rotation
-  const advanceToNextTeam = useCallback(() => {
-    if (!state) return;
-    const teamCount = state.teams.length;
-    const nextIndex = (turnIndex + 1) % teamCount;
-    const nextTeamId = state.teams[nextIndex].id;
-
-    // If we wrapped around, increment round
-    if (nextIndex === 0) {
-      setRound((r) => r + 1);
-    }
-    setTurnIndex(nextIndex);
-    dispatch({ type: 'SET_STATE', payload: { ...state, currentTeamId: nextTeamId } });
-  }, [state, turnIndex, dispatch]);
-
-  // Award full points and auto-advance
+  // Award full points, close question, and flag advance
   const handleAwardFullPoints = useCallback((teamId: string) => {
     awardFullPoints(teamId);
     closeQuestion();
-    // Use setTimeout to let state update before advancing
-    setTimeout(() => advanceToNextTeam(), 0);
-  }, [awardFullPoints, closeQuestion, advanceToNextTeam]);
+    setPendingAdvance(true);
+  }, [awardFullPoints, closeQuestion]);
 
   // Show half-points team picker popup
   const handleHalfPointsClick = useCallback(() => {
     setShowHalfPointsPicker(true);
   }, []);
 
-  // Award half points to selected team, close, and advance
+  // Award half points to selected team, close, and flag advance
   const handleHalfPointsSelect = useCallback((teamId: string) => {
     awardHalfPoints(teamId);
     closeQuestion();
     setShowHalfPointsPicker(false);
-    setTimeout(() => advanceToNextTeam(), 0);
-  }, [awardHalfPoints, closeQuestion, advanceToNextTeam]);
+    setPendingAdvance(true);
+  }, [awardHalfPoints, closeQuestion]);
 
-  // Close question without awarding (skip) and advance
+  // Close/skip question and flag advance
   const handleCloseQuestion = useCallback(() => {
     closeQuestion();
-    setTimeout(() => advanceToNextTeam(), 0);
-  }, [closeQuestion, advanceToNextTeam]);
+    setPendingAdvance(true);
+  }, [closeQuestion]);
+
+  // Effect: advance to next team once state has settled back to BOARD_VIEW
+  useEffect(() => {
+    if (!pendingAdvance || !state) return;
+    if (state.phase !== GamePhase.BOARD_VIEW) return;
+
+    const teamCount = state.teams.length;
+    const nextIndex = (turnIndex + 1) % teamCount;
+    const nextTeamId = state.teams[nextIndex].id;
+
+    if (nextIndex === 0) {
+      setRound((r) => r + 1);
+    }
+    setTurnIndex(nextIndex);
+    setPendingAdvance(false);
+    dispatch({ type: 'SET_STATE', payload: { ...state, currentTeamId: nextTeamId } });
+  }, [pendingAdvance, state, turnIndex, dispatch]);
 
   // Show validation errors
   if (validationErrors.length > 0) {
