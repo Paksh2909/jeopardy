@@ -7,6 +7,7 @@ import Scoreboard from './components/Scoreboard';
 import { TeamSetup } from './components/TeamSetup';
 import { TeamPickerPopup } from './components/TeamPickerPopup';
 import { RulesPopup } from './components/RulesPopup';
+import { GameHistoryLog, HistoryEntry } from './components/GameHistoryLog';
 import { useTimer } from './hooks/useTimer';
 import { validateGameConfig } from './utils/validation';
 import { loadGameState } from './utils/persistence';
@@ -266,6 +267,8 @@ function AppContent() {
   const [round, setRound] = useState(1);
   const [turnIndex, setTurnIndex] = useState(0);
   const [pendingAdvance, setPendingAdvance] = useState(false);
+  const [history, setHistory] = useState<HistoryEntry[]>([]);
+  const historyIdRef = useRef(0);
 
   // Track previous phase to detect transitions
   const prevPhaseRef = useRef<GamePhase | null>(null);
@@ -366,8 +369,40 @@ function AppContent() {
     }
   }, [state, dispatch]);
 
+  // Helper to get current question's category name
+  const getActiveCategory = useCallback((): string => {
+    if (!state || !state.activeQuestion) return '';
+    for (const topic of state.config.topics) {
+      if (topic.questions.some(q => q.id === state.activeQuestion!.id)) {
+        return topic.name;
+      }
+    }
+    return '';
+  }, [state]);
+
+  const addHistoryEntry = useCallback((type: HistoryEntry['type'], teamName?: string, points?: number) => {
+    if (!state || !state.activeQuestion) return;
+    historyIdRef.current += 1;
+    const entry: HistoryEntry = {
+      id: historyIdRef.current,
+      timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+      type,
+      teamName,
+      questionText: state.activeQuestion.text,
+      category: getActiveCategory(),
+      points,
+      round,
+    };
+    setHistory(prev => [...prev, entry]);
+  }, [state, round, getActiveCategory]);
+
   // Award full points, close question, and flag advance
   const handleAwardFullPoints = useCallback((teamId: string) => {
+    if (state) {
+      const team = state.teams.find(t => t.id === teamId);
+      const points = state.activeQuestion?.points ?? 0;
+      addHistoryEntry('full_points', team?.name, points);
+    }
     awardFullPoints(teamId);
     closeQuestion();
     playCelebration();
@@ -379,7 +414,7 @@ function AppContent() {
       colors: ['#43a047', '#f9a825', '#58a6ff', '#e53935', '#fff', '#7cb342'],
     });
     setPendingAdvance(true);
-  }, [awardFullPoints, closeQuestion]);
+  }, [awardFullPoints, closeQuestion, state, addHistoryEntry]);
 
   // Show half-points team picker popup
   const handleHalfPointsClick = useCallback(() => {
@@ -388,6 +423,11 @@ function AppContent() {
 
   // Award half points to selected team, close, and flag advance
   const handleHalfPointsSelect = useCallback((teamId: string) => {
+    if (state) {
+      const team = state.teams.find(t => t.id === teamId);
+      const points = state.activeQuestion ? Math.max(1, Math.floor(state.activeQuestion.points / 2)) : 0;
+      addHistoryEntry('half_points', team?.name, points);
+    }
     awardHalfPoints(teamId);
     closeQuestion();
     playCelebration();
@@ -400,13 +440,14 @@ function AppContent() {
     });
     setShowHalfPointsPicker(false);
     setPendingAdvance(true);
-  }, [awardHalfPoints, closeQuestion]);
+  }, [awardHalfPoints, closeQuestion, state, addHistoryEntry]);
 
   // Close/skip question and flag advance
   const handleCloseQuestion = useCallback(() => {
+    addHistoryEntry('skipped');
     closeQuestion();
     setPendingAdvance(true);
-  }, [closeQuestion]);
+  }, [closeQuestion, addHistoryEntry]);
 
   // Effect: advance to next team once state has settled back to BOARD_VIEW
   useEffect(() => {
@@ -534,6 +575,7 @@ function AppContent() {
             onPauseTimer={timer.pause}
             onResumeTimer={timer.resume}
           />
+          <GameHistoryLog entries={history} />
         </aside>
       </div>
 
