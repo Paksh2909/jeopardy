@@ -52,28 +52,28 @@ function createMockState(overrides: Partial<GameState> = {}): GameState {
 
 describe('getDifficultyColor', () => {
   it('returns green for difficulty 1', () => {
-    expect(getDifficultyColor(1)).toBe('rgba(76, 175, 80, 0.35)');
+    expect(getDifficultyColor(1)).toBe('rgba(76, 175, 80, 0.55)');
   });
 
   it('returns light green for difficulty 2', () => {
-    expect(getDifficultyColor(2)).toBe('rgba(139, 195, 74, 0.35)');
+    expect(getDifficultyColor(2)).toBe('rgba(139, 195, 74, 0.5)');
   });
 
   it('returns amber for difficulty 3', () => {
-    expect(getDifficultyColor(3)).toBe('rgba(255, 193, 7, 0.3)');
+    expect(getDifficultyColor(3)).toBe('rgba(255, 193, 7, 0.45)');
   });
 
   it('returns orange for difficulty 4', () => {
-    expect(getDifficultyColor(4)).toBe('rgba(255, 152, 0, 0.3)');
+    expect(getDifficultyColor(4)).toBe('rgba(255, 152, 0, 0.45)');
   });
 
   it('returns red for difficulty 5', () => {
-    expect(getDifficultyColor(5)).toBe('rgba(244, 67, 54, 0.3)');
+    expect(getDifficultyColor(5)).toBe('rgba(244, 67, 54, 0.45)');
   });
 
   it('returns grey fallback for unknown difficulty', () => {
-    expect(getDifficultyColor(0)).toBe('rgba(158, 158, 158, 0.25)');
-    expect(getDifficultyColor(6)).toBe('rgba(158, 158, 158, 0.25)');
+    expect(getDifficultyColor(0)).toBe('rgba(158, 158, 158, 0.35)');
+    expect(getDifficultyColor(6)).toBe('rgba(158, 158, 158, 0.35)');
   });
 });
 
