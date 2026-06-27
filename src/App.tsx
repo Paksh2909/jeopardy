@@ -16,7 +16,7 @@ import { GameConfig, GamePhase, QuestionStatus } from './types';
  * Sample game configuration for development/demo purposes.
  */
 const SAMPLE_CONFIG: GameConfig = {
-  title: 'Friday Trivia Night',
+  title: 'Birthday Game Night Trivia',
   defaultTimerSeconds: 30,
   topics: [
     {
@@ -93,14 +93,14 @@ const appContainerStyles: React.CSSProperties = {
   flexDirection: 'column',
   height: '100vh',
   backgroundColor: 'transparent',
-  color: '#e0e0ff',
+  color: '#e0e6ef',
   fontFamily: "'Inter', system-ui, -apple-system, sans-serif",
 };
 
 const headerStyles: React.CSSProperties = {
   padding: '14px 28px',
-  background: 'linear-gradient(90deg, rgba(26,26,60,0.95) 0%, rgba(36,36,62,0.95) 100%)',
-  borderBottom: '1px solid rgba(255,255,255,0.08)',
+  background: 'linear-gradient(90deg, rgba(10,10,18,0.95) 0%, rgba(13,17,23,0.95) 100%)',
+  borderBottom: '1px solid rgba(255,255,255,0.06)',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
@@ -112,7 +112,7 @@ const titleStyles: React.CSSProperties = {
   fontSize: '1.5rem',
   fontWeight: 800,
   fontFamily: "'Space Grotesk', 'Inter', sans-serif",
-  background: 'linear-gradient(135deg, #89b4fa, #cba6f7)',
+  background: 'linear-gradient(135deg, #58a6ff, #3fb8af)',
   WebkitBackgroundClip: 'text',
   WebkitTextFillColor: 'transparent',
   letterSpacing: '-0.02em',
@@ -136,9 +136,9 @@ const sidebarStyles: React.CSSProperties = {
   flexDirection: 'column',
   gap: '12px',
   padding: '16px',
-  borderLeft: '1px solid rgba(255,255,255,0.08)',
+  borderLeft: '1px solid rgba(255,255,255,0.06)',
   overflowY: 'auto',
-  background: 'rgba(15,15,30,0.6)',
+  background: 'rgba(10,10,18,0.7)',
   backdropFilter: 'blur(10px)',
   position: 'relative',
   zIndex: 1100,
@@ -468,7 +468,7 @@ function AppContent() {
         <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
           <span style={{ fontSize: '0.9rem', color: '#aaa' }}>Round {round}</span>
           <button
-            style={{ padding: '6px 14px', borderRadius: '6px', border: '1px solid #555', backgroundColor: 'transparent', color: '#89b4fa', fontSize: '0.85rem', fontWeight: 600, cursor: 'pointer' }}
+            style={{ padding: '6px 14px', borderRadius: '6px', border: '1px solid rgba(255,255,255,0.15)', backgroundColor: 'transparent', color: '#58a6ff', fontSize: '0.85rem', fontWeight: 600, cursor: 'pointer' }}
             onClick={() => setShowRules(true)}
             data-testid="rules-button"
           >

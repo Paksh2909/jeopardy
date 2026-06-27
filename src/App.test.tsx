@@ -18,7 +18,7 @@ describe('App', () => {
     // Click start with default team names
     fireEvent.click(screen.getByTestId('start-game-button'))
 
-    expect(screen.getByText('Friday Trivia Night')).toBeInTheDocument()
+    expect(screen.getByText('Birthday Game Night Trivia')).toBeInTheDocument()
     expect(screen.getByTestId('game-board')).toBeInTheDocument()
     expect(screen.getByRole('region', { name: 'Scoreboard' })).toBeInTheDocument()
     expect(screen.getByRole('region', { name: 'Host Control Panel' })).toBeInTheDocument()

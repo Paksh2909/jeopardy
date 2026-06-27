@@ -41,12 +41,12 @@ const swimlaneHeaderStyles: React.CSSProperties = {
   fontSize: '0.95rem',
   textAlign: 'center',
   padding: '14px 8px',
-  background: 'linear-gradient(135deg, #1a1a3e, #2a2a4e)',
-  color: '#cba6f7',
+  background: 'linear-gradient(135deg, #0d1117, #161b22)',
+  color: '#58a6ff',
   borderRadius: '10px 10px 0 0',
   letterSpacing: '0.03em',
   textTransform: 'uppercase',
-  border: '1px solid rgba(255,255,255,0.08)',
+  border: '1px solid rgba(255,255,255,0.06)',
   borderBottom: 'none',
 };
 

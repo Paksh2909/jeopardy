@@ -16,7 +16,7 @@ const styles = {
     left: 0,
     width: '100vw',
     height: '100vh',
-    background: 'radial-gradient(ellipse at center, rgba(15,12,41,0.92) 0%, rgba(0,0,0,0.95) 100%)',
+    background: 'radial-gradient(ellipse at center, rgba(10,10,15,0.94) 0%, rgba(0,0,0,0.97) 100%)',
     display: 'flex',
     flexDirection: 'column' as const,
     alignItems: 'center',

@@ -22,11 +22,11 @@ const styles: Record<string, React.CSSProperties> = {
     margin: 0,
     fontSize: '0.8rem',
     fontWeight: 700,
-    color: '#cba6f7',
+    color: '#58a6ff',
     textTransform: 'uppercase',
     letterSpacing: '0.1em',
     paddingBottom: '8px',
-    borderBottom: '1px solid rgba(255,255,255,0.08)',
+    borderBottom: '1px solid rgba(255,255,255,0.06)',
   },
   teamCard: {
     display: 'flex',
@@ -39,8 +39,8 @@ const styles: Record<string, React.CSSProperties> = {
     border: '1px solid rgba(255,255,255,0.05)',
   },
   teamCardActive: {
-    backgroundColor: 'rgba(137,180,250,0.1)',
-    border: '1px solid rgba(137,180,250,0.4)',
+    backgroundColor: 'rgba(88,166,255,0.08)',
+    border: '1px solid rgba(88,166,255,0.4)',
   },
   teamName: {
     fontSize: '0.95rem',
