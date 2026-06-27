@@ -327,6 +327,11 @@ function AppContent() {
       timer.pause();
     }
 
+    // When transitioning TO ANSWER_REVEALED: stop the timer
+    if (currentPhase === GamePhase.ANSWER_REVEALED) {
+      timer.pause();
+    }
+
     // When transitioning TO BOARD_VIEW from any active phase: reset the timer
     if (currentPhase === GamePhase.BOARD_VIEW && prevPhase !== null && prevPhase !== GamePhase.BOARD_VIEW) {
       timer.reset();
