@@ -9,13 +9,13 @@ import type { Question, Topic } from '../types';
  */
 export function getDifficultyColor(difficulty: number): string {
   const colorMap: Record<number, string> = {
-    1: 'rgba(76, 175, 80, 0.55)',   // Green (easy)
-    2: 'rgba(139, 195, 74, 0.5)',   // Light green
-    3: 'rgba(255, 193, 7, 0.45)',   // Amber (medium)
-    4: 'rgba(255, 152, 0, 0.45)',   // Orange
-    5: 'rgba(244, 67, 54, 0.45)',   // Red (hard)
+    1: '#2e7d42',   // Muted forest green (easy)
+    2: '#558b2f',   // Muted olive green
+    3: '#c49000',   // Muted gold (medium)
+    4: '#d4700a',   // Muted burnt orange
+    5: '#c62828',   // Muted deep red (hard)
   };
-  return colorMap[difficulty] ?? 'rgba(158, 158, 158, 0.35)';
+  return colorMap[difficulty] ?? '#546e7a';
 }
 
 // --- Styles ---
@@ -57,11 +57,11 @@ function getCardStyles(question: Question, isClickable: boolean): React.CSSPrope
 
   // Solid border hint color (slightly more opaque version)
   const borderColors: Record<number, string> = {
-    1: 'rgba(76, 175, 80, 0.7)',
-    2: 'rgba(139, 195, 74, 0.65)',
-    3: 'rgba(255, 193, 7, 0.6)',
-    4: 'rgba(255, 152, 0, 0.6)',
-    5: 'rgba(244, 67, 54, 0.6)',
+    1: 'rgba(46, 125, 66, 0.7)',
+    2: 'rgba(85, 139, 47, 0.7)',
+    3: 'rgba(196, 144, 0, 0.7)',
+    4: 'rgba(212, 112, 10, 0.7)',
+    5: 'rgba(198, 40, 40, 0.7)',
   };
   const borderColor = isSkipped
     ? 'rgba(255,255,255,0.05)'
