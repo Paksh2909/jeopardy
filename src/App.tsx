@@ -374,8 +374,8 @@ function AppContent() {
             currentTeamId={state.currentTeamId}
             phase={state.phase}
             isTimerRunning={timer.isRunning}
-            onAwardFullPoints={awardFullPoints}
-            onAwardHalfPoints={awardHalfPoints}
+            onAwardFullPoints={(teamId) => { awardFullPoints(teamId); closeQuestion(); }}
+            onAwardHalfPoints={(teamId) => { awardHalfPoints(teamId); closeQuestion(); }}
             onStartRapidFire={startRapidFire}
             onRevealAnswer={revealAnswer}
             onCloseQuestion={closeQuestion}
