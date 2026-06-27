@@ -5,6 +5,7 @@ import { QuestionOverlay } from './components/QuestionOverlay';
 import { HostControlPanel } from './components/HostControlPanel';
 import Scoreboard from './components/Scoreboard';
 import { TeamSetup } from './components/TeamSetup';
+import { TeamPickerPopup } from './components/TeamPickerPopup';
 import { useTimer } from './hooks/useTimer';
 import { validateGameConfig } from './utils/validation';
 import { loadGameState } from './utils/persistence';
@@ -241,8 +242,11 @@ function AppContent() {
 
   const [showResumeDialog, setShowResumeDialog] = useState(false);
   const [showTeamSetup, setShowTeamSetup] = useState(false);
+  const [showHalfPointsPicker, setShowHalfPointsPicker] = useState(false);
   const [validationErrors, setValidationErrors] = useState<string[]>([]);
   const [initialized, setInitialized] = useState(false);
+  const [round, setRound] = useState(1);
+  const [turnIndex, setTurnIndex] = useState(0);
 
   // Track previous phase to detect transitions
   const prevPhaseRef = useRef<GamePhase | null>(null);
@@ -337,6 +341,48 @@ function AppContent() {
     }
   }, [state, dispatch]);
 
+  // Advance to next team in rotation
+  const advanceToNextTeam = useCallback(() => {
+    if (!state) return;
+    const teamCount = state.teams.length;
+    const nextIndex = (turnIndex + 1) % teamCount;
+    const nextTeamId = state.teams[nextIndex].id;
+
+    // If we wrapped around, increment round
+    if (nextIndex === 0) {
+      setRound((r) => r + 1);
+    }
+    setTurnIndex(nextIndex);
+    dispatch({ type: 'SET_STATE', payload: { ...state, currentTeamId: nextTeamId } });
+  }, [state, turnIndex, dispatch]);
+
+  // Award full points and auto-advance
+  const handleAwardFullPoints = useCallback((teamId: string) => {
+    awardFullPoints(teamId);
+    closeQuestion();
+    // Use setTimeout to let state update before advancing
+    setTimeout(() => advanceToNextTeam(), 0);
+  }, [awardFullPoints, closeQuestion, advanceToNextTeam]);
+
+  // Show half-points team picker popup
+  const handleHalfPointsClick = useCallback(() => {
+    setShowHalfPointsPicker(true);
+  }, []);
+
+  // Award half points to selected team, close, and advance
+  const handleHalfPointsSelect = useCallback((teamId: string) => {
+    awardHalfPoints(teamId);
+    closeQuestion();
+    setShowHalfPointsPicker(false);
+    setTimeout(() => advanceToNextTeam(), 0);
+  }, [awardHalfPoints, closeQuestion, advanceToNextTeam]);
+
+  // Close question without awarding (skip) and advance
+  const handleCloseQuestion = useCallback(() => {
+    closeQuestion();
+    setTimeout(() => advanceToNextTeam(), 0);
+  }, [closeQuestion, advanceToNextTeam]);
+
   // Show validation errors
   if (validationErrors.length > 0) {
     return (
@@ -403,6 +449,7 @@ function AppContent() {
       {/* Header */}
       <header style={headerStyles}>
         <h1 style={titleStyles}>{state.config.title}</h1>
+        <span style={{ fontSize: '0.9rem', color: '#aaa' }}>Round {round}</span>
       </header>
 
       {/* Main content area */}
@@ -420,11 +467,11 @@ function AppContent() {
             currentTeamId={state.currentTeamId}
             phase={state.phase}
             isTimerRunning={timer.isRunning}
-            onAwardFullPoints={(teamId) => { awardFullPoints(teamId); closeQuestion(); }}
-            onAwardHalfPoints={(teamId) => { awardHalfPoints(teamId); closeQuestion(); }}
+            onAwardFullPoints={handleAwardFullPoints}
+            onAwardHalfPoints={handleHalfPointsClick}
             onStartRapidFire={startRapidFire}
             onRevealAnswer={revealAnswer}
-            onCloseQuestion={closeQuestion}
+            onCloseQuestion={handleCloseQuestion}
             onSetCurrentTeam={handleSetCurrentTeam}
             onPauseTimer={timer.pause}
             onResumeTimer={timer.resume}
@@ -440,7 +487,18 @@ function AppContent() {
           isExpired={timer.isExpired}
           isRapidFire={state.isRapidFire}
           isAnswerRevealed={state.isAnswerRevealed}
-          onClose={closeQuestion}
+          onClose={handleCloseQuestion}
+        />
+      )}
+
+      {/* Half Points Team Picker Popup */}
+      {showHalfPointsPicker && (
+        <TeamPickerPopup
+          teams={state.teams}
+          title="Award Half Points"
+          subtitle="Which team answered during rapid fire?"
+          onSelect={handleHalfPointsSelect}
+          onCancel={() => setShowHalfPointsPicker(false)}
         />
       )}
     </div>
