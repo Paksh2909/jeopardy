@@ -31,13 +31,14 @@ export function playBuzzer(): void {
 
     oscillator.type = 'square';
     oscillator.frequency.setValueAtTime(180, ctx.currentTime);
-    oscillator.frequency.linearRampToValueAtTime(120, ctx.currentTime + 0.3);
+    oscillator.frequency.linearRampToValueAtTime(100, ctx.currentTime + 0.8);
 
     gain.gain.setValueAtTime(0.3, ctx.currentTime);
-    gain.gain.linearRampToValueAtTime(0, ctx.currentTime + 0.5);
+    gain.gain.setValueAtTime(0.3, ctx.currentTime + 0.6);
+    gain.gain.linearRampToValueAtTime(0, ctx.currentTime + 1.0);
 
     oscillator.start(ctx.currentTime);
-    oscillator.stop(ctx.currentTime + 0.5);
+    oscillator.stop(ctx.currentTime + 1.0);
   } catch {
     // Silently fail if audio isn't available
   }
@@ -77,26 +78,40 @@ export function playCelebration(): void {
 
 /**
  * Click/select sound — plays when a question card is selected.
- * A short, soft pop.
+ * A card-flip whoosh sound.
  */
 export function playSelect(): void {
   try {
     const ctx = getAudioContext();
-    const oscillator = ctx.createOscillator();
+
+    // White noise burst for the "flip" texture
+    const bufferSize = ctx.sampleRate * 0.08;
+    const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+    const data = buffer.getChannelData(0);
+    for (let i = 0; i < bufferSize; i++) {
+      data[i] = (Math.random() * 2 - 1) * (1 - i / bufferSize);
+    }
+
+    const noise = ctx.createBufferSource();
+    noise.buffer = buffer;
+
+    // Bandpass filter to shape the noise into a "swish"
+    const filter = ctx.createBiquadFilter();
+    filter.type = 'bandpass';
+    filter.frequency.setValueAtTime(3000, ctx.currentTime);
+    filter.frequency.linearRampToValueAtTime(800, ctx.currentTime + 0.08);
+    filter.Q.setValueAtTime(1, ctx.currentTime);
+
     const gain = ctx.createGain();
-
-    oscillator.connect(gain);
-    gain.connect(ctx.destination);
-
-    oscillator.type = 'sine';
-    oscillator.frequency.setValueAtTime(800, ctx.currentTime);
-    oscillator.frequency.linearRampToValueAtTime(600, ctx.currentTime + 0.08);
-
-    gain.gain.setValueAtTime(0.15, ctx.currentTime);
+    gain.gain.setValueAtTime(0.2, ctx.currentTime);
     gain.gain.linearRampToValueAtTime(0, ctx.currentTime + 0.1);
 
-    oscillator.start(ctx.currentTime);
-    oscillator.stop(ctx.currentTime + 0.1);
+    noise.connect(filter);
+    filter.connect(gain);
+    gain.connect(ctx.destination);
+
+    noise.start(ctx.currentTime);
+    noise.stop(ctx.currentTime + 0.1);
   } catch {
     // Silently fail if audio isn't available
   }
