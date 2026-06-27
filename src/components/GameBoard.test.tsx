@@ -113,7 +113,7 @@ describe('GameBoard', () => {
     render(<GameBoard />);
 
     const answeredCard = screen.getByTestId('question-card-q4');
-    expect(answeredCard).toHaveStyle({ opacity: '0.5' });
+    expect(answeredCard).toHaveStyle({ opacity: '0.4' });
     expect(answeredCard).toHaveStyle({ textDecoration: 'line-through' });
     expect(answeredCard.textContent).toContain('✓');
   });
@@ -123,7 +123,7 @@ describe('GameBoard', () => {
     render(<GameBoard />);
 
     const skippedCard = screen.getByTestId('question-card-q5');
-    expect(skippedCard).toHaveStyle({ backgroundColor: '#BDBDBD' });
+    expect(skippedCard).toHaveStyle({ backgroundColor: 'rgba(100,100,120,0.3)' });
     expect(skippedCard.textContent).toContain('—');
   });
 

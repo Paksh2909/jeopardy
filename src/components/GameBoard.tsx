@@ -22,8 +22,8 @@ export function getDifficultyColor(difficulty: number): string {
 
 const boardStyles: React.CSSProperties = {
   display: 'flex',
-  gap: '16px',
-  padding: '24px',
+  gap: '14px',
+  padding: '20px',
   overflowX: 'auto',
   minHeight: '100%',
 };
@@ -31,19 +31,23 @@ const boardStyles: React.CSSProperties = {
 const swimlaneStyles: React.CSSProperties = {
   display: 'flex',
   flexDirection: 'column',
-  gap: '12px',
-  minWidth: '200px',
+  gap: '10px',
+  minWidth: '180px',
   flex: '1 1 0',
 };
 
 const swimlaneHeaderStyles: React.CSSProperties = {
-  fontWeight: 'bold',
-  fontSize: '1.1rem',
+  fontWeight: 700,
+  fontSize: '0.95rem',
   textAlign: 'center',
-  padding: '12px 8px',
-  backgroundColor: '#263238',
-  color: '#ffffff',
-  borderRadius: '8px 8px 0 0',
+  padding: '14px 8px',
+  background: 'linear-gradient(135deg, #1a1a3e, #2a2a4e)',
+  color: '#cba6f7',
+  borderRadius: '10px 10px 0 0',
+  letterSpacing: '0.03em',
+  textTransform: 'uppercase',
+  border: '1px solid rgba(255,255,255,0.08)',
+  borderBottom: 'none',
 };
 
 function getCardStyles(question: Question, isClickable: boolean): React.CSSProperties {
@@ -52,19 +56,22 @@ function getCardStyles(question: Question, isClickable: boolean): React.CSSPrope
   const isSkipped = question.status === QuestionStatus.SKIPPED;
 
   return {
-    padding: '16px 12px',
-    borderRadius: '6px',
-    backgroundColor: isSkipped ? '#BDBDBD' : baseColor,
-    color: isSkipped ? '#757575' : '#ffffff',
-    opacity: isAnswered ? 0.5 : 1,
+    padding: '18px 14px',
+    borderRadius: '8px',
+    backgroundColor: isSkipped ? 'rgba(100,100,120,0.3)' : baseColor,
+    color: isSkipped ? '#888' : '#ffffff',
+    opacity: isAnswered ? 0.4 : 1,
     textDecoration: isAnswered ? 'line-through' : 'none',
     cursor: isClickable ? 'pointer' : 'default',
-    fontWeight: 500,
-    fontSize: '0.95rem',
-    boxShadow: '0 2px 4px rgba(0,0,0,0.2)',
+    fontWeight: 600,
+    fontSize: '1rem',
+    boxShadow: isClickable
+      ? '0 4px 12px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.15)'
+      : '0 2px 4px rgba(0,0,0,0.2)',
     transition: 'transform 0.15s ease, box-shadow 0.15s ease',
     userSelect: 'none' as const,
     position: 'relative' as const,
+    border: '1px solid rgba(255,255,255,0.1)',
   };
 }
 

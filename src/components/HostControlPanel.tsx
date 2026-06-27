@@ -19,13 +19,15 @@ export interface HostControlPanelProps {
 const styles: Record<string, React.CSSProperties> = {
   container: {
     padding: '16px',
-    backgroundColor: '#1e1e2e',
-    borderRadius: '8px',
+    background: 'rgba(30,30,50,0.7)',
+    borderRadius: '12px',
     display: 'flex',
     flexDirection: 'column',
     gap: '12px',
     color: '#fff',
-    fontFamily: 'sans-serif',
+    fontFamily: "'Inter', sans-serif",
+    border: '1px solid rgba(255,255,255,0.06)',
+    backdropFilter: 'blur(8px)',
   },
   heading: {
     margin: 0,

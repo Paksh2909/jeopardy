@@ -92,25 +92,30 @@ const appContainerStyles: React.CSSProperties = {
   display: 'flex',
   flexDirection: 'column',
   height: '100vh',
-  backgroundColor: '#0f0f1a',
-  color: '#ffffff',
-  fontFamily: 'system-ui, -apple-system, sans-serif',
+  backgroundColor: 'transparent',
+  color: '#e0e0ff',
+  fontFamily: "'Inter', system-ui, -apple-system, sans-serif",
 };
 
 const headerStyles: React.CSSProperties = {
-  padding: '16px 24px',
-  backgroundColor: '#1a1a2e',
-  borderBottom: '1px solid #333',
+  padding: '14px 28px',
+  background: 'linear-gradient(90deg, rgba(26,26,60,0.95) 0%, rgba(36,36,62,0.95) 100%)',
+  borderBottom: '1px solid rgba(255,255,255,0.08)',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
+  backdropFilter: 'blur(10px)',
 };
 
 const titleStyles: React.CSSProperties = {
   margin: 0,
-  fontSize: '1.4rem',
-  fontWeight: 700,
-  color: '#e0e0ff',
+  fontSize: '1.5rem',
+  fontWeight: 800,
+  fontFamily: "'Space Grotesk', 'Inter', sans-serif",
+  background: 'linear-gradient(135deg, #89b4fa, #cba6f7)',
+  WebkitBackgroundClip: 'text',
+  WebkitTextFillColor: 'transparent',
+  letterSpacing: '-0.02em',
 };
 
 const mainContentStyles: React.CSSProperties = {
@@ -122,17 +127,19 @@ const mainContentStyles: React.CSSProperties = {
 const boardAreaStyles: React.CSSProperties = {
   flex: 1,
   overflow: 'auto',
+  padding: '8px',
 };
 
 const sidebarStyles: React.CSSProperties = {
-  width: '280px',
+  width: '290px',
   display: 'flex',
   flexDirection: 'column',
   gap: '12px',
   padding: '16px',
-  borderLeft: '1px solid #333',
+  borderLeft: '1px solid rgba(255,255,255,0.08)',
   overflowY: 'auto',
-  backgroundColor: '#12121f',
+  background: 'rgba(15,15,30,0.6)',
+  backdropFilter: 'blur(10px)',
   position: 'relative',
   zIndex: 1100,
 };

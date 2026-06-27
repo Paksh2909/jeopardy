@@ -16,7 +16,7 @@ const styles = {
     left: 0,
     width: '100vw',
     height: '100vh',
-    backgroundColor: 'rgba(0, 0, 0, 0.75)',
+    background: 'radial-gradient(ellipse at center, rgba(15,12,41,0.92) 0%, rgba(0,0,0,0.95) 100%)',
     display: 'flex',
     flexDirection: 'column' as const,
     alignItems: 'center',
@@ -24,6 +24,7 @@ const styles = {
     zIndex: 1000,
     padding: '2rem',
     boxSizing: 'border-box' as const,
+    backdropFilter: 'blur(4px)',
   },
   content: {
     display: 'flex',
@@ -34,11 +35,13 @@ const styles = {
     width: '100%',
   },
   questionText: {
-    fontSize: '2rem',
+    fontSize: '2.2rem',
     fontWeight: 700,
     color: '#ffffff',
     textAlign: 'center' as const,
     lineHeight: 1.4,
+    fontFamily: "'Space Grotesk', 'Inter', sans-serif",
+    textShadow: '0 2px 8px rgba(0,0,0,0.4)',
   },
   timer: {
     fontSize: '3rem',
