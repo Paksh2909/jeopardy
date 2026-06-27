@@ -4,6 +4,7 @@ import { GameBoard } from './components/GameBoard';
 import { QuestionOverlay } from './components/QuestionOverlay';
 import { HostControlPanel } from './components/HostControlPanel';
 import Scoreboard from './components/Scoreboard';
+import { TeamSetup } from './components/TeamSetup';
 import { useTimer } from './hooks/useTimer';
 import { validateGameConfig } from './utils/validation';
 import { loadGameState } from './utils/persistence';
@@ -239,6 +240,7 @@ function AppContent() {
   } = useGameState();
 
   const [showResumeDialog, setShowResumeDialog] = useState(false);
+  const [showTeamSetup, setShowTeamSetup] = useState(false);
   const [validationErrors, setValidationErrors] = useState<string[]>([]);
   const [initialized, setInitialized] = useState(false);
 
@@ -255,15 +257,19 @@ function AppContent() {
     if (savedState) {
       setShowResumeDialog(true);
     } else {
-      startFreshGame();
+      setShowTeamSetup(true);
     }
     setInitialized(true);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const startFreshGame = useCallback(() => {
-    // Validate config first
-    const validation = validateGameConfig(SAMPLE_CONFIG);
+  const startGameWithTeams = useCallback((teamNames: string[]) => {
+    const config: GameConfig = {
+      ...SAMPLE_CONFIG,
+      teams: teamNames.map((name) => ({ name })),
+    };
+
+    const validation = validateGameConfig(config);
     if (!validation.valid) {
       setValidationErrors(validation.errors);
       return;
@@ -271,7 +277,8 @@ function AppContent() {
 
     clearSavedGame();
     try {
-      initializeGame(SAMPLE_CONFIG);
+      initializeGame(config);
+      setShowTeamSetup(false);
     } catch (e: unknown) {
       if (e instanceof Error) {
         setValidationErrors([e.message]);
@@ -286,8 +293,8 @@ function AppContent() {
 
   const handleStartFresh = useCallback(() => {
     setShowResumeDialog(false);
-    startFreshGame();
-  }, [startFreshGame]);
+    setShowTeamSetup(true);
+  }, []);
 
   // Handle phase transitions for timer management
   useEffect(() => {
@@ -376,6 +383,15 @@ function AppContent() {
   }
 
   // Waiting for initialization
+  if (showTeamSetup) {
+    return (
+      <TeamSetup
+        initialTeams={['Team Alpha', 'Team Beta', 'Team Gamma']}
+        onStart={startGameWithTeams}
+      />
+    );
+  }
+
   if (!state) {
     return <div style={{ padding: '24px', color: '#fff' }}>Loading...</div>;
   }
