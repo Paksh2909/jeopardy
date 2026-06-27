@@ -372,10 +372,11 @@ function AppContent() {
     closeQuestion();
     playCelebration();
     confetti({
-      particleCount: 150,
-      spread: 80,
-      origin: { y: 0.6 },
-      colors: ['#43a047', '#f9a825', '#58a6ff', '#e53935', '#fff'],
+      particleCount: 250,
+      spread: 160,
+      origin: { y: 0.5 },
+      startVelocity: 45,
+      colors: ['#43a047', '#f9a825', '#58a6ff', '#e53935', '#fff', '#7cb342'],
     });
     setPendingAdvance(true);
   }, [awardFullPoints, closeQuestion]);
@@ -391,10 +392,11 @@ function AppContent() {
     closeQuestion();
     playCelebration();
     confetti({
-      particleCount: 60,
-      spread: 50,
-      origin: { y: 0.6 },
-      colors: ['#f9a825', '#58a6ff', '#fff'],
+      particleCount: 100,
+      spread: 120,
+      origin: { y: 0.5 },
+      startVelocity: 35,
+      colors: ['#f9a825', '#58a6ff', '#fff', '#7cb342'],
     });
     setShowHalfPointsPicker(false);
     setPendingAdvance(true);
