@@ -52,23 +52,23 @@ function createMockState(overrides: Partial<GameState> = {}): GameState {
 
 describe('getDifficultyColor', () => {
   it('returns green for difficulty 1', () => {
-    expect(getDifficultyColor(1)).toBe('#2e7d42');
+    expect(getDifficultyColor(1)).toBe('#43a047');
   });
 
   it('returns light green for difficulty 2', () => {
-    expect(getDifficultyColor(2)).toBe('#558b2f');
+    expect(getDifficultyColor(2)).toBe('#7cb342');
   });
 
   it('returns amber for difficulty 3', () => {
-    expect(getDifficultyColor(3)).toBe('#c49000');
+    expect(getDifficultyColor(3)).toBe('#f9a825');
   });
 
   it('returns orange for difficulty 4', () => {
-    expect(getDifficultyColor(4)).toBe('#d4700a');
+    expect(getDifficultyColor(4)).toBe('#f57c00');
   });
 
   it('returns red for difficulty 5', () => {
-    expect(getDifficultyColor(5)).toBe('#c62828');
+    expect(getDifficultyColor(5)).toBe('#e53935');
   });
 
   it('returns grey fallback for unknown difficulty', () => {

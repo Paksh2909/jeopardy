@@ -9,11 +9,11 @@ import type { Question, Topic } from '../types';
  */
 export function getDifficultyColor(difficulty: number): string {
   const colorMap: Record<number, string> = {
-    1: '#2e7d42',   // Muted forest green (easy)
-    2: '#558b2f',   // Muted olive green
-    3: '#c49000',   // Muted gold (medium)
-    4: '#d4700a',   // Muted burnt orange
-    5: '#c62828',   // Muted deep red (hard)
+    1: '#43a047',   // Vibrant green (easy)
+    2: '#7cb342',   // Lime green
+    3: '#f9a825',   // Bright gold (medium)
+    4: '#f57c00',   // Bright orange
+    5: '#e53935',   // Vibrant red (hard)
   };
   return colorMap[difficulty] ?? '#546e7a';
 }
@@ -57,11 +57,11 @@ function getCardStyles(question: Question, isClickable: boolean): React.CSSPrope
 
   // Solid border hint color (slightly more opaque version)
   const borderColors: Record<number, string> = {
-    1: 'rgba(46, 125, 66, 0.7)',
-    2: 'rgba(85, 139, 47, 0.7)',
-    3: 'rgba(196, 144, 0, 0.7)',
-    4: 'rgba(212, 112, 10, 0.7)',
-    5: 'rgba(198, 40, 40, 0.7)',
+    1: 'rgba(67, 160, 71, 0.8)',
+    2: 'rgba(124, 179, 66, 0.8)',
+    3: 'rgba(249, 168, 37, 0.75)',
+    4: 'rgba(245, 124, 0, 0.75)',
+    5: 'rgba(229, 57, 53, 0.75)',
   };
   const borderColor = isSkipped
     ? 'rgba(255,255,255,0.05)'
