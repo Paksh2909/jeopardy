@@ -45,6 +45,36 @@ const SAMPLE_CONFIG: GameConfig = {
         { id: 'pop-4', text: 'What is the highest-grossing film of all time (unadjusted)?', answer: 'Avatar', difficulty: 4, points: 400, timerSeconds: 40, status: QuestionStatus.AVAILABLE },
       ],
     },
+    {
+      id: 'geography',
+      name: 'Geography',
+      questions: [
+        { id: 'geo-1', text: 'What is the largest continent by area?', answer: 'Asia', difficulty: 1, points: 100, timerSeconds: null, status: QuestionStatus.AVAILABLE },
+        { id: 'geo-2', text: 'Which country has the most time zones?', answer: 'France', difficulty: 2, points: 200, timerSeconds: null, status: QuestionStatus.AVAILABLE },
+        { id: 'geo-3', text: 'What is the smallest country in the world?', answer: 'Vatican City', difficulty: 2, points: 200, timerSeconds: null, status: QuestionStatus.AVAILABLE },
+        { id: 'geo-4', text: 'What river flows through the most countries?', answer: 'The Danube (10 countries)', difficulty: 4, points: 400, timerSeconds: null, status: QuestionStatus.AVAILABLE },
+      ],
+    },
+    {
+      id: 'sports',
+      name: 'Sports',
+      questions: [
+        { id: 'spo-1', text: 'How many players are on a soccer team?', answer: '11', difficulty: 1, points: 100, timerSeconds: null, status: QuestionStatus.AVAILABLE },
+        { id: 'spo-2', text: 'In which sport is the term "love" used for zero?', answer: 'Tennis', difficulty: 1, points: 100, timerSeconds: null, status: QuestionStatus.AVAILABLE },
+        { id: 'spo-3', text: 'Who holds the record for most Olympic gold medals?', answer: 'Michael Phelps', difficulty: 3, points: 300, timerSeconds: null, status: QuestionStatus.AVAILABLE },
+        { id: 'spo-4', text: 'What country has won the most FIFA World Cups?', answer: 'Brazil (5)', difficulty: 3, points: 300, timerSeconds: null, status: QuestionStatus.AVAILABLE },
+      ],
+    },
+    {
+      id: 'food-drink',
+      name: 'Food & Drink',
+      questions: [
+        { id: 'food-1', text: 'What country is the origin of sushi?', answer: 'Japan', difficulty: 1, points: 100, timerSeconds: null, status: QuestionStatus.AVAILABLE },
+        { id: 'food-2', text: 'What is the main ingredient in guacamole?', answer: 'Avocado', difficulty: 1, points: 100, timerSeconds: null, status: QuestionStatus.AVAILABLE },
+        { id: 'food-3', text: 'What grain is used to make sake?', answer: 'Rice', difficulty: 2, points: 200, timerSeconds: null, status: QuestionStatus.AVAILABLE },
+        { id: 'food-4', text: 'Which spice is the most expensive by weight?', answer: 'Saffron', difficulty: 4, points: 400, timerSeconds: null, status: QuestionStatus.AVAILABLE },
+      ],
+    },
   ],
   teams: [
     { name: 'Team Alpha' },
