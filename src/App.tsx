@@ -11,6 +11,7 @@ import { useTimer } from './hooks/useTimer';
 import { validateGameConfig } from './utils/validation';
 import { loadGameState } from './utils/persistence';
 import { GameConfig, GamePhase, QuestionStatus } from './types';
+import { playBuzzer, playCelebration, playSelect } from './utils/sounds';
 
 /**
  * Sample game configuration for development/demo purposes.
@@ -268,7 +269,7 @@ function AppContent() {
   // Track previous phase to detect transitions
   const prevPhaseRef = useRef<GamePhase | null>(null);
 
-  const timer = useTimer();
+  const timer = useTimer(playBuzzer);
 
   // On mount: check for saved state
   useEffect(() => {
@@ -335,6 +336,7 @@ function AppContent() {
       if (state.activeQuestion) {
         const duration = state.activeQuestion.timerSeconds ?? state.config.defaultTimerSeconds;
         timer.start(duration);
+        playSelect();
       }
     }
 
@@ -367,6 +369,7 @@ function AppContent() {
   const handleAwardFullPoints = useCallback((teamId: string) => {
     awardFullPoints(teamId);
     closeQuestion();
+    playCelebration();
     setPendingAdvance(true);
   }, [awardFullPoints, closeQuestion]);
 
@@ -379,6 +382,7 @@ function AppContent() {
   const handleHalfPointsSelect = useCallback((teamId: string) => {
     awardHalfPoints(teamId);
     closeQuestion();
+    playCelebration();
     setShowHalfPointsPicker(false);
     setPendingAdvance(true);
   }, [awardHalfPoints, closeQuestion]);
