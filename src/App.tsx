@@ -26,7 +26,8 @@ const SAMPLE_CONFIG: GameConfig = {
         { id: 'sci-1', text: 'What planet is closest to the sun?', answer: 'Mercury', difficulty: 1, points: 100, timerSeconds: null, status: QuestionStatus.AVAILABLE },
         { id: 'sci-2', text: 'What is the chemical symbol for gold?', answer: 'Au', difficulty: 2, points: 200, timerSeconds: null, status: QuestionStatus.AVAILABLE },
         { id: 'sci-3', text: 'What is the powerhouse of the cell?', answer: 'Mitochondria', difficulty: 3, points: 300, timerSeconds: null, status: QuestionStatus.AVAILABLE },
-        { id: 'sci-4', text: 'What is the speed of light in m/s (approx)?', answer: '299,792,458 m/s', difficulty: 4, points: 400, timerSeconds: 45, status: QuestionStatus.AVAILABLE },
+        { id: 'sci-4', text: 'What is the speed of light in m/s (approx)?', answer: '299,792,458 m/s', difficulty: 4, points: 400, timerSeconds: null, status: QuestionStatus.AVAILABLE },
+        { id: 'sci-5', text: 'What is the Heisenberg Uncertainty Principle?', answer: 'You cannot simultaneously know the exact position and momentum of a particle', difficulty: 5, points: 500, timerSeconds: 45, status: QuestionStatus.AVAILABLE },
       ],
     },
     {
@@ -36,6 +37,8 @@ const SAMPLE_CONFIG: GameConfig = {
         { id: 'his-1', text: 'In what year did World War II end?', answer: '1945', difficulty: 1, points: 100, timerSeconds: null, status: QuestionStatus.AVAILABLE },
         { id: 'his-2', text: 'Who was the first Roman Emperor?', answer: 'Augustus', difficulty: 2, points: 200, timerSeconds: null, status: QuestionStatus.AVAILABLE },
         { id: 'his-3', text: 'What ancient wonder was located in Alexandria?', answer: 'The Lighthouse (Pharos)', difficulty: 3, points: 300, timerSeconds: null, status: QuestionStatus.AVAILABLE },
+        { id: 'his-4', text: 'What treaty ended World War I?', answer: 'Treaty of Versailles', difficulty: 4, points: 400, timerSeconds: null, status: QuestionStatus.AVAILABLE },
+        { id: 'his-5', text: 'In what year was the Magna Carta signed?', answer: '1215', difficulty: 5, points: 500, timerSeconds: 45, status: QuestionStatus.AVAILABLE },
       ],
     },
     {
@@ -45,7 +48,8 @@ const SAMPLE_CONFIG: GameConfig = {
         { id: 'pop-1', text: 'Who directed the movie Jaws?', answer: 'Steven Spielberg', difficulty: 1, points: 100, timerSeconds: null, status: QuestionStatus.AVAILABLE },
         { id: 'pop-2', text: 'What band recorded "Bohemian Rhapsody"?', answer: 'Queen', difficulty: 2, points: 200, timerSeconds: null, status: QuestionStatus.AVAILABLE },
         { id: 'pop-3', text: 'In what year was the first iPhone released?', answer: '2007', difficulty: 3, points: 300, timerSeconds: null, status: QuestionStatus.AVAILABLE },
-        { id: 'pop-4', text: 'What is the highest-grossing film of all time (unadjusted)?', answer: 'Avatar', difficulty: 4, points: 400, timerSeconds: 40, status: QuestionStatus.AVAILABLE },
+        { id: 'pop-4', text: 'What is the highest-grossing film of all time (unadjusted)?', answer: 'Avatar', difficulty: 4, points: 400, timerSeconds: null, status: QuestionStatus.AVAILABLE },
+        { id: 'pop-5', text: 'What was the first music video played on MTV?', answer: 'Video Killed the Radio Star by The Buggles', difficulty: 5, points: 500, timerSeconds: 45, status: QuestionStatus.AVAILABLE },
       ],
     },
     {
@@ -54,8 +58,9 @@ const SAMPLE_CONFIG: GameConfig = {
       questions: [
         { id: 'geo-1', text: 'What is the largest continent by area?', answer: 'Asia', difficulty: 1, points: 100, timerSeconds: null, status: QuestionStatus.AVAILABLE },
         { id: 'geo-2', text: 'Which country has the most time zones?', answer: 'France', difficulty: 2, points: 200, timerSeconds: null, status: QuestionStatus.AVAILABLE },
-        { id: 'geo-3', text: 'What is the smallest country in the world?', answer: 'Vatican City', difficulty: 2, points: 200, timerSeconds: null, status: QuestionStatus.AVAILABLE },
+        { id: 'geo-3', text: 'What is the smallest country in the world?', answer: 'Vatican City', difficulty: 3, points: 300, timerSeconds: null, status: QuestionStatus.AVAILABLE },
         { id: 'geo-4', text: 'What river flows through the most countries?', answer: 'The Danube (10 countries)', difficulty: 4, points: 400, timerSeconds: null, status: QuestionStatus.AVAILABLE },
+        { id: 'geo-5', text: 'What is the only country that spans both Europe and Asia with its capital in both?', answer: 'Turkey (Istanbul)', difficulty: 5, points: 500, timerSeconds: 45, status: QuestionStatus.AVAILABLE },
       ],
     },
     {
@@ -63,9 +68,10 @@ const SAMPLE_CONFIG: GameConfig = {
       name: 'Sports',
       questions: [
         { id: 'spo-1', text: 'How many players are on a soccer team?', answer: '11', difficulty: 1, points: 100, timerSeconds: null, status: QuestionStatus.AVAILABLE },
-        { id: 'spo-2', text: 'In which sport is the term "love" used for zero?', answer: 'Tennis', difficulty: 1, points: 100, timerSeconds: null, status: QuestionStatus.AVAILABLE },
+        { id: 'spo-2', text: 'In which sport is the term "love" used for zero?', answer: 'Tennis', difficulty: 2, points: 200, timerSeconds: null, status: QuestionStatus.AVAILABLE },
         { id: 'spo-3', text: 'Who holds the record for most Olympic gold medals?', answer: 'Michael Phelps', difficulty: 3, points: 300, timerSeconds: null, status: QuestionStatus.AVAILABLE },
-        { id: 'spo-4', text: 'What country has won the most FIFA World Cups?', answer: 'Brazil (5)', difficulty: 3, points: 300, timerSeconds: null, status: QuestionStatus.AVAILABLE },
+        { id: 'spo-4', text: 'What country has won the most FIFA World Cups?', answer: 'Brazil (5)', difficulty: 4, points: 400, timerSeconds: null, status: QuestionStatus.AVAILABLE },
+        { id: 'spo-5', text: 'Who scored the "Hand of God" goal in the 1986 World Cup?', answer: 'Diego Maradona', difficulty: 5, points: 500, timerSeconds: 45, status: QuestionStatus.AVAILABLE },
       ],
     },
     {
@@ -73,9 +79,10 @@ const SAMPLE_CONFIG: GameConfig = {
       name: 'Food & Drink',
       questions: [
         { id: 'food-1', text: 'What country is the origin of sushi?', answer: 'Japan', difficulty: 1, points: 100, timerSeconds: null, status: QuestionStatus.AVAILABLE },
-        { id: 'food-2', text: 'What is the main ingredient in guacamole?', answer: 'Avocado', difficulty: 1, points: 100, timerSeconds: null, status: QuestionStatus.AVAILABLE },
-        { id: 'food-3', text: 'What grain is used to make sake?', answer: 'Rice', difficulty: 2, points: 200, timerSeconds: null, status: QuestionStatus.AVAILABLE },
+        { id: 'food-2', text: 'What is the main ingredient in guacamole?', answer: 'Avocado', difficulty: 2, points: 200, timerSeconds: null, status: QuestionStatus.AVAILABLE },
+        { id: 'food-3', text: 'What grain is used to make sake?', answer: 'Rice', difficulty: 3, points: 300, timerSeconds: null, status: QuestionStatus.AVAILABLE },
         { id: 'food-4', text: 'Which spice is the most expensive by weight?', answer: 'Saffron', difficulty: 4, points: 400, timerSeconds: null, status: QuestionStatus.AVAILABLE },
+        { id: 'food-5', text: 'What French term means "everything in its place" in cooking?', answer: 'Mise en place', difficulty: 5, points: 500, timerSeconds: 45, status: QuestionStatus.AVAILABLE },
       ],
     },
   ],
