@@ -305,6 +305,7 @@ function AppContent() {
     try {
       initializeGame(config);
       setShowTeamSetup(false);
+      setShowRules(true);
     } catch (e: unknown) {
       if (e instanceof Error) {
         setValidationErrors([e.message]);
