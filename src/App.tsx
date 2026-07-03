@@ -62,7 +62,7 @@ const SAMPLE_CONFIG: GameConfig = {
         { id: 'food-1', text: 'What spice gives curry its yellow color?', answer: 'Turmeric', difficulty: 1, points: 100, timerSeconds: null, status: QuestionStatus.AVAILABLE },
         { id: 'food-2', text: 'Which country is the largest producer of coffee in the world?', answer: 'Brazil', difficulty: 2, points: 200, timerSeconds: null, status: QuestionStatus.AVAILABLE },
         { id: 'food-3', text: 'What Italian city is credited with inventing pizza?', answer: 'Naples', difficulty: 3, points: 300, timerSeconds: null, status: QuestionStatus.AVAILABLE },
-        { id: 'food-4', text: 'What is the name of the Japanese art of presenting food beautifully?', answer: 'Moritsuke', difficulty: 4, points: 400, timerSeconds: null, status: QuestionStatus.AVAILABLE },
+        { id: 'food-4', text: 'What is the traditional French mother sauce made from a white roux and milk?', answer: 'Béchamel', difficulty: 4, points: 400, timerSeconds: null, status: QuestionStatus.AVAILABLE },
         { id: 'food-5', text: 'Which chemical compound is responsible for the spicy heat in chili peppers?', answer: 'Capsaicin', difficulty: 5, points: 500, timerSeconds: null, status: QuestionStatus.AVAILABLE },
       ],
     },
