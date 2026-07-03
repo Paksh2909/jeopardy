@@ -81,10 +81,10 @@ const SAMPLE_CONFIG: GameConfig = {
       id: 'henna',
       name: 'Who Knows Henna?',
       questions: [
-        { id: 'hen-1', text: 'Question 1 about Henna', answer: 'Answer 1', difficulty: 1, points: 100, timerSeconds: null, status: QuestionStatus.AVAILABLE },
+        { id: 'hen-1', text: 'Who is Henna\'s favorite Bollywood actor?', answer: 'Shah Rukh Khan', difficulty: 1, points: 100, timerSeconds: null, status: QuestionStatus.AVAILABLE },
         { id: 'hen-2', text: 'Question 2 about Henna', answer: 'Answer 2', difficulty: 2, points: 200, timerSeconds: null, status: QuestionStatus.AVAILABLE },
         { id: 'hen-3', text: 'Question 3 about Henna', answer: 'Answer 3', difficulty: 3, points: 300, timerSeconds: null, status: QuestionStatus.AVAILABLE },
-        { id: 'hen-4', text: 'Question 4 about Henna', answer: 'Answer 4', difficulty: 4, points: 400, timerSeconds: null, status: QuestionStatus.AVAILABLE },
+        { id: 'hen-4', text: 'What is the one thing Henna cannot sleep without?', answer: 'Her shawl (Bonus: Shawl the Paul)', difficulty: 4, points: 400, timerSeconds: null, status: QuestionStatus.AVAILABLE },
         { id: 'hen-5', text: 'Question 5 about Henna', answer: 'Answer 5', difficulty: 5, points: 500, timerSeconds: null, status: QuestionStatus.AVAILABLE },
       ],
     },
