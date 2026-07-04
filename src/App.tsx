@@ -28,9 +28,9 @@ const SAMPLE_CONFIG: GameConfig = {
       questions: [
         { id: 'bol-1', text: 'Which Bollywood film holds the record for highest worldwide gross?', answer: 'Dangal', difficulty: 1, points: 100, timerSeconds: null, status: QuestionStatus.AVAILABLE },
         { id: 'bol-2', text: 'Who played the lead role in the movie "3 Idiots"?', answer: 'Aamir Khan', difficulty: 2, points: 200, timerSeconds: null, status: QuestionStatus.AVAILABLE },
-        { id: 'bol-3', text: 'Which film featured the song "Chaiyya Chaiyya" filmed on top of a train?', answer: 'Dil Se', difficulty: 3, points: 300, timerSeconds: null, status: QuestionStatus.AVAILABLE },
+        { id: 'bol-3', text: 'Which 1975 film is often called the greatest Bollywood film of all time?', answer: 'Sholay', difficulty: 3, points: 300, timerSeconds: null, status: QuestionStatus.AVAILABLE },
         { id: 'bol-4', text: 'Who directed the movie "Lagaan"?', answer: 'Ashutosh Gowariker', difficulty: 4, points: 400, timerSeconds: null, status: QuestionStatus.AVAILABLE },
-        { id: 'bol-5', text: 'Which 1975 film is often called the greatest Bollywood film of all time?', answer: 'Sholay', difficulty: 5, points: 500, timerSeconds: null, status: QuestionStatus.AVAILABLE },
+        { id: 'bol-5', text: 'Which film featured the song "Chaiyya Chaiyya" filmed on top of a train?', answer: 'Dil Se', difficulty: 5, points: 500, timerSeconds: null, status: QuestionStatus.AVAILABLE },
       ],
     },
     {
